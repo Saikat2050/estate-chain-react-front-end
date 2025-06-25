@@ -1,0 +1,127 @@
+.footer {
+  background: #11152e;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 48px ;
+  border-radius: 24px 24px 0 0;
+  margin-top: 64px;
+  gap: 48px;
+
+  .footer-col {
+    flex: 1 1 0;
+    min-width: 220px;
+    &.center {
+      text-align: center;
+    }
+    &.right {
+      text-align: right;
+    }
+  }
+
+  h4 {
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+    color: #ffb347;
+    font-weight: 600;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 12px;
+    input[type="email"] {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: 8px;
+      border: none;
+      background: #22223a;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    input[type="email"]::placeholder {
+      color: #e7aee7;
+      opacity: 1;
+    }
+    button {
+      padding: 0 24px;
+      border-radius: 8px;
+      border: none;
+      background: #ffb347;
+      color: #22223a;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      &:hover {
+        background: #e7aee7;
+        color: #11152e;
+      }
+    }
+  }
+
+  .contact-info {
+    margin-top: 10px;
+    font-size: 1.05rem;
+    a {
+      color: #e7aee7;
+      text-decoration: none;
+      transition: color 0.2s;
+      &:hover {
+        color: #ffb347;
+      }
+    }
+    div {
+      margin-bottom: 8px;
+    }
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 18px;
+    margin-top: 10px;
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #22223a;
+      border-radius: 50%;
+      color: #e7aee7;
+      font-size: 1.3rem;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      &:hover {
+        background: #ffb347;
+        color: #11152e;
+      }
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    padding: 36px 4vw 24px 4vw;
+    border-radius: 18px 18px 0 0;
+    .footer-col {
+      max-width: 100%;
+      text-align: left !important;
+    }
+    .social-icons {
+      justify-content: flex-start;
+    }
+  }
+} 

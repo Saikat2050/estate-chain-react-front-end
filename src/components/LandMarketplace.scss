@@ -1,0 +1,160 @@
+.land_marketplace {
+    padding: 60px 0 ;
+
+    .land_cards {
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 16px;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+
+        .land_cards_listing {
+            flex: 0 0 auto;
+            width: 30%;
+            background: #715641;
+            border-radius: 16px;
+
+            .land_image {
+                min-height: 200px;
+                position: relative;
+
+                img {
+                    max-width: 100%;
+                    border-radius: 16px 16px 0 0;
+                    height: 200px;
+                }
+
+                .sale_icon {
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                    background: #f4ffff;
+                    color: #2d2622;
+                    font-weight: 600;
+                    border-radius: 24px;
+                    padding: 5px 6px;
+                    font-size: 12px;
+                    z-index: 1;
+                }
+            }
+
+            .land_details {
+                padding: 20px;
+
+                .land_location {
+                    margin-bottom: 20px;
+
+                    h6 {
+                        color: #fff;
+                        margin-bottom: 7px;
+                    }
+
+                    p {
+                        color: rgb(255, 146, 255);
+                    }
+                }
+
+                .land_price {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+
+                    h6 {
+                        color: #fff;
+                    }
+
+                    p {
+                        color: rgb(255, 146, 255);
+                        font-size: 12px;
+                    }
+                }
+
+                .land_token {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 5px;
+
+                    p {
+                        color: #fff;
+                        font-size: 14px;
+                    }
+                }
+
+                .process_bar {
+                    width: 100%;
+                    background: #b99656;
+                    height: 8px;
+                    border-radius: 16px;
+                    position: relative;
+
+                    .process_bar_completed {
+                        background: #fff;
+                        position: absolute;
+                        height: 8px;
+                        border-radius: 16px;
+                        left: 0;
+                        top: 0;
+                    }
+                }
+
+                .bottom_buy_buttons {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 12px;
+
+                    button {
+                        height: 40px;
+                        border-radius: 8px;
+                        font-weight: 600;
+
+                        &.button_bg_white {
+                            width: 69%;
+                        }
+
+                        &.button_bg_black {
+                            width: 29%;
+                            background: #000;
+                            border: 1px solid #fff;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 1100px) {
+    .land_cards{
+        margin-right: -20px;
+    }
+}
+@media (max-width: 768px) {
+    .land_marketplace {
+        padding: 40px 0 20px 0;
+        .land_cards{
+            padding-right: 20px;
+            &::-webkit-scrollbar {
+                display: none;
+              }
+            .land_cards_listing{
+                width: 87%;
+                .land_details{
+                    .bottom_buy_buttons{
+                        gap: 10px;
+                        button{
+                            flex: auto;
+                            width: auto !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
