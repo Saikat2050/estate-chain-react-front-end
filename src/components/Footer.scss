@@ -1,23 +1,22 @@
+footer{
+  background: #715641;
+  border-radius: 24px 24px 0 0;
+}
 .footer {
-  background: #11152e;
+  
   color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 48px ;
-  border-radius: 24px 24px 0 0;
-  margin-top: 64px;
+  padding: 48px 0;
+  margin: auto;
   gap: 48px;
+  max-width: 1200px;
 
   .footer-col {
     flex: 1 1 0;
     min-width: 220px;
-    &.center {
-      text-align: center;
-    }
-    &.right {
-      text-align: right;
-    }
+
   }
 
   h4 {
@@ -35,32 +34,21 @@
       padding: 14px 18px;
       border-radius: 8px;
       border: none;
-      background: #22223a;
+      background: #2a2422;
       color: #fff;
       font-size: 1rem;
       outline: none;
       transition: box-shadow 0.2s;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      height: 48px;
     }
     input[type="email"]::placeholder {
-      color: #e7aee7;
+      color: #ffb347;
       opacity: 1;
     }
     button {
       padding: 0 24px;
-      border-radius: 8px;
-      border: none;
-      background: #ffb347;
-      color: #22223a;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      &:hover {
-        background: #e7aee7;
-        color: #11152e;
-      }
+      height: 48px;
     }
   }
 
@@ -68,7 +56,7 @@
     margin-top: 10px;
     font-size: 1.05rem;
     a {
-      color: #e7aee7;
+      color: #ffb347;
       text-decoration: none;
       transition: color 0.2s;
       &:hover {
@@ -82,7 +70,7 @@
 
   .social-icons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 18px;
     margin-top: 10px;
     a {
@@ -93,7 +81,7 @@
       height: 40px;
       background: #22223a;
       border-radius: 50%;
-      color: #e7aee7;
+      color: #ffb347;
       font-size: 1.3rem;
       transition: background 0.2s, color 0.2s, box-shadow 0.2s;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -110,18 +98,31 @@
 }
 
 @media (max-width: 1100px) {
+  footer{
+    border-radius: 0;
+  }
   .footer {
     flex-direction: column;
     align-items: stretch;
     gap: 32px;
-    padding: 36px 4vw 24px 4vw;
+    padding: 26px 20px;
     border-radius: 18px 18px 0 0;
     .footer-col {
       max-width: 100%;
-      text-align: left !important;
+      text-align: center !important;
+      .newsletter-form{
+          display: block;
+          input,button{
+            width: 100%;
+          }
+          input{
+            margin-bottom: 15px;
+            height: 52px;
+          }
+      }
     }
     .social-icons {
-      justify-content: flex-start;
+      justify-content: center;
     }
   }
 } 

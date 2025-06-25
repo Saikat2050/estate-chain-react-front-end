@@ -31,7 +31,7 @@ const LandMarketplace = () => (
             </div>
             <div className="bottom_buy_buttons">
               <button className="button_bg_white">Buy Tokens</button>
-              <button className="button_bg_black">View Details</button>
+              <button className="button_bg_yellow">View Details</button>
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@ const LandMarketplace = () => (
             </div>
             <div className="bottom_buy_buttons">
               <button className="button_bg_white">Buy Tokens</button>
-              <button className="button_bg_black">View Details</button>
+              <button className="button_bg_yellow">View Details</button>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@ const LandMarketplace = () => (
             </div>
             <div className="bottom_buy_buttons">
               <button className="button_bg_white">Buy Tokens</button>
-              <button className="button_bg_black">View Details</button>
+              <button className="button_bg_yellow">View Details</button>
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@ const LandMarketplace = () => (
             </div>
             <div className="bottom_buy_buttons">
               <button className="button_bg_white">Buy Tokens</button>
-              <button className="button_bg_black">View Details</button>
+              <button className="button_bg_yellow">View Details</button>
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@ const LandMarketplace = () => (
             </div>
             <div className="bottom_buy_buttons">
               <button className="button_bg_white">Buy Tokens</button>
-              <button className="button_bg_black">View Details</button>
+              <button className="button_bg_yellow">View Details</button>
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@ const LandMarketplace = () => (
             </div>
             <div className="bottom_buy_buttons">
               <button className="button_bg_white">Buy Tokens</button>
-              <button className="button_bg_black">View Details</button>
+              <button className="button_bg_yellow">View Details</button>
             </div>
           </div>
         </div>

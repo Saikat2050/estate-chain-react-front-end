@@ -53,7 +53,7 @@
                     }
 
                     p {
-                        color: rgb(255, 146, 255);
+                        color: #ffb347;
                     }
                 }
 
@@ -68,7 +68,7 @@
                     }
 
                     p {
-                        color: rgb(255, 146, 255);
+                        color: #ffb347;
                         font-size: 12px;
                     }
                 }
@@ -113,14 +113,11 @@
                         font-weight: 600;
 
                         &.button_bg_white {
-                            width: 69%;
+                            width: 65%;
                         }
 
-                        &.button_bg_black {
-                            width: 29%;
-                            background: #000;
-                            border: 1px solid #fff;
-                            color: #fff;
+                        &.button_bg_yellow {
+                            width: 33%;
                         }
                     }
                 }
@@ -144,7 +141,7 @@
                 display: none;
               }
             .land_cards_listing{
-                width: 87%;
+                width: 94%;
                 .land_details{
                     .bottom_buy_buttons{
                         gap: 10px;

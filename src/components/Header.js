@@ -18,7 +18,7 @@ const Header = () => {
           </ul>
         </div>
         <div className="sell">
-          <button className="button-primary">Become A Member</button>
+          <button className="button_bg_yellow">Become A Member</button>
         </div>
         <div className="hamburger" onClick={() => setMenuOpen(true)}>
           <span></span>

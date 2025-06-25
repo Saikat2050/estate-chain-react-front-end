@@ -3,22 +3,22 @@ import './Footer.scss';
 
 const Footer = () => (
   <footer>
-  <di className="footer">
-  <div className="footer-col left">
+  <div className="footer">
+  <div className="footer-col">
       <h4>Subscribe to our Newsletter</h4>
       <form className="newsletter-form" onSubmit={e => e.preventDefault()}>
         <input type="email" placeholder="Enter your email" required />
-        <button type="submit">Subscribe</button>
+        <button className="button_bg_yellow" type="submit">Subscribe</button>
       </form>
     </div>
-    <div className="footer-col center">
+    <div className="footer-col">
       <h4>Contact Us</h4>
       <div className="contact-info">
         <div>Email: <a href="mailto:info@estatechain.com">info@estatechain.com</a></div>
         <div>Phone: <a href="tel:+1234567890">+1 234 567 890</a></div>
       </div>
     </div>
-    <div className="footer-col right">
+    <div className="footer-col">
       <h4>Follow Us</h4>
       <div className="social-icons">
         <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter">

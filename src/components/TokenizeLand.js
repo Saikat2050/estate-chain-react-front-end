@@ -33,7 +33,7 @@ const TokenizeLand = () => (
             <label>Total Tokens
               <input type="text" placeholder="1000" />
             </label>
-            <input type="submit" value="" style={{display: 'none'}} />
+            <button className='button_bg_white'>Submit</button>
           </form>
         </div>
       </div>

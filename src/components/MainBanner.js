@@ -7,8 +7,8 @@ const MainBanner = () => (
       <h1>Tokenize Your Land</h1>
       <p>Transform real estate into digital assets. Buy, sell, and trade fractional ownership of land parcels on the blockchain.</p>
       <div className="bottom_buttons">
-        <button className="button-primary">Become A Member</button>
-        <button className="button-primary">Become A Member</button>
+        <button className="button_bg_yellow">Become A Member</button>
+        <button className="button_bg_yellow">Become A Member</button>
       </div>
     </div>
     <div className="section_down_arrow" id="section_down_arrow">

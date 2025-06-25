@@ -35,17 +35,7 @@ button{
     border: none;
     cursor: pointer;
 }
-.button-primary {
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 15px;
-    box-shadow: none;
-    color: rgb(255, 255, 255);
-    background: rgb(243, 70, 83);
-    padding: 0px 20px;
-    border-radius: 8px;
-    min-height: 46px;
-}
+
 .top_header{
     text-align: center;
     margin-bottom: 40px;
@@ -54,7 +44,7 @@ button{
         margin-bottom: 10px;
     }
     p{
-        color: rgb(255, 146, 255);
+        color: #ffb347;
     }
 }
 .main{
@@ -64,7 +54,24 @@ button{
 .bottom_section{
   background: #2a2422;
 }
-
+.button_bg_white {
+  background: #fff;
+  height: 40px;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0 12px;
+}
+html {
+  scroll-behavior: smooth;
+}
+.button_bg_yellow {
+  background: #ffb347;
+  color: #22223a;
+  height: 40px;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0 12px;
+}
 @media (max-width: 1100px) {
   .main{
     max-width: 100%;
@@ -99,3 +106,23 @@ button{
   }
 }
 
+@media (min-width: 768px) {
+  .button_bg_yellow{
+    transition:
+    background-color 0.2s ease,
+    color 0.4s ease;
+    &:hover{
+      color: #000;
+      background-color: #fff;
+
+    }
+  }
+  .button_bg_white{
+    transition:
+    background-color 0.2s ease,
+    color 0.4s ease;
+    &:hover{
+      background: #ffb347;
+    }
+  }
+}
