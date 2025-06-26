@@ -1,5 +1,5 @@
 import React from 'react';
-import './LandMarketplace.scss';
+import './scss/LandMarketplace.scss';
 
 const LandMarketplace = () => (
   <div className="land_marketplace">

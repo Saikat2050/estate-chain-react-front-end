@@ -1,5 +1,5 @@
 import React from 'react';
-import './TokenizeLand.scss';
+import './scss/TokenizeLand.scss';
 
 const TokenizeLand = () => (
   <div className="tokenize_land_container">

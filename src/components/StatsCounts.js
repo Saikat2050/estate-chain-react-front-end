@@ -1,5 +1,5 @@
 import React from 'react';
-import './StatsCounts.scss';
+import './scss/StatsCounts.scss';
 
 const StatsCounts = () => (
   <div className="no_count">
