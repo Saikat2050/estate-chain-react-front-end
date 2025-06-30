@@ -1,0 +1,128 @@
+footer{
+  background: #715641;
+  border-radius: 24px 24px 0 0;
+}
+.footer {
+  
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 48px 0;
+  margin: auto;
+  gap: 48px;
+  max-width: 1200px;
+
+  .footer-col {
+    flex: 1 1 0;
+    min-width: 220px;
+
+  }
+
+  h4 {
+    font-size: 21px;
+    margin-bottom: 18px;
+    color: #ffb347;
+    font-weight: 600;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 12px;
+    input[type="email"] {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: 8px;
+      border: none;
+      background: #2a2422;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      transition: box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      height: 48px;
+    }
+    input[type="email"]::placeholder {
+      color: #ffb347;
+      opacity: 1;
+    }
+    button {
+      padding: 0 24px;
+      height: 48px;
+    }
+  }
+
+  .contact-info {
+    margin-top: 10px;
+    font-size: 17px;
+    a {
+      color: #ffb347;
+      text-decoration: none;
+      transition: color 0.2s;
+      &:hover {
+        color: #ffb347;
+      }
+    }
+    div {
+      margin-bottom: 8px;
+    }
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 10px;
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #22223a;
+      border-radius: 50%;
+      color: #ffb347;
+      font-size: 21px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      &:hover {
+        background: #ffb347;
+        color: #11152e;
+      }
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  footer{
+    border-radius: 0;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    padding: 26px 20px;
+    border-radius: 18px 18px 0 0;
+    .footer-col {
+      max-width: 100%;
+      text-align: center !important;
+      .newsletter-form{
+          display: block;
+          input,button{
+            width: 100%;
+          }
+          input{
+            margin-bottom: 15px;
+            height: 52px;
+          }
+      }
+    }
+    .social-icons {
+      justify-content: center;
+    }
+  }
+} 
