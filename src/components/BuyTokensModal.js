@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./BuyTokensModal.scss";
 import { axiosRequest } from "../utils/axiosHelper";
 import image from "../images/estate-chain-mini-logo.png";
-import { ethers } from "ethers";
+import { Contract, parseEther } from "ethers";
 import ContractABI from "../contracts/LandToken.json";
 
 const BuyTokensModal = ({ show, onClose, property }) => {
@@ -42,13 +42,11 @@ const BuyTokensModal = ({ show, onClose, property }) => {
   }, []);
 
   const handleBuyNow = async (tokenId, priceInEther) => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
     const contractAddress = "0xContractAddress"; // Since we dod not deploy the Smart contract, do not have contract address
 
-    const contract = new ethers.Contract(contractAddress, ContractABI, signer);
+    const contract = new Contract(contractAddress, ContractABI, window.signer);
 
-    const priceInWei = ethers.utils.parseEther(priceInEther.toString());
+    const priceInWei = parseEther(priceInEther.toString());
 
     const tx = await contract.purchase(tokenId, {
       value: priceInWei,
@@ -59,13 +57,11 @@ const BuyTokensModal = ({ show, onClose, property }) => {
   };
 
   const handleLeaseNow = async (tokenId, leaseTerms) => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
     const contractAddress = "0xContractAddress"; // Since we dod not deploy the Smart contract, do not have contract address
 
-    const contract = new ethers.Contract(contractAddress, ContractABI, signer);
+    const contract = new Contract(contractAddress, ContractABI, window.signer);
 
-    const value = ethers.utils.parseEther(leaseTerms.price.toString());
+    const value = parseEther(leaseTerms.price.toString());
 
     const tx = await contract.leaseLand(
       tokenId,
