@@ -90,7 +90,7 @@ const LandMarketplace = () => {
               <div className="bottom_buy_buttons">
                 <button
                   className="button_bg_white"
-                  onClick={() => handleBuyTokens(property.cid || "bafkreidxfd74cxujw4idmfgvio4vu4v2pyee24nemzlueffue5wmkyltk4")}
+                  onClick={() => handleBuyTokens(property.cid)}
                   title="Buy tokens for this property"
                 >
                   Buy Tokens

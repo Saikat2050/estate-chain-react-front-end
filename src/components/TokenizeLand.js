@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './scss/TokenizeLand.scss';
 import { axiosRequest } from '../utils/axiosHelper';
+import { ethers } from "ethers";
+import ContractABI from "./LandToken.json";
+
 
 const TokenizeLand = () => {
   const [formData, setFormData] = useState({
@@ -33,6 +36,62 @@ const TokenizeLand = () => {
     }));
   };
 
+  const mintLandToken = async (payload, signer) => {
+    const contractAddress = "0xContractAddress"; // Since we dod not deploy the Smart contract, do not have contract address
+    const contract = new ethers.Contract(contractAddress, ContractABI.abi, signer);
+  
+    // STEP 1 → Mint NFT with placeholder URI
+    const tx = await contract.mintProperty(
+      formData.tokenAmount,
+      formData.priceInUsd,
+      "ipfs://pending"
+    );
+  
+    console.log("Mint TX hash:", tx.hash);
+  
+    const receipt = await tx.wait();
+  
+    let tokenId = null;
+    for (const log of receipt.logs) {
+      try {
+        const parsed = contract.interface.parseLog(log);
+        if (parsed.name === "Transfer") {
+          tokenId = parsed.args.id; // ERC1155 emits TransferSingle with .id
+          break;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  
+    if (!tokenId) {
+      console.error("❌ No tokenId found in mint logs.");
+      return;
+    }
+  
+    console.log("✅ Minted tokenId:", tokenId.toString());
+  
+    // STEP 2 → Send data to BE to save off-chain
+    const response = await axiosRequest({
+      baseUrl: "http://localhost:7022",
+      endPoint: "/v1/land-token/create",
+      method: "POST",
+      data: payload
+    });
+    console.log("Land tokenized successfully:", response);
+  
+    const cid = response.cid;
+  
+    console.log("✅ Data saved in Lighthouse with CID:", cid);
+  
+   // STEP 3 → Update token URI
+    const tx2 = await contract.setTokenURI(tokenId, `ipfs://${cid}`);
+    await tx2.wait();
+  
+    console.log("✅ Token URI updated!");
+  
+  }  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -52,13 +111,7 @@ const TokenizeLand = () => {
     };
 
     try {
-      const response = await axiosRequest({
-        baseUrl: "http://localhost:7022",
-        endPoint: "/v1/land-token/create",
-        method: "POST",
-        data: payload
-      });
-      console.log("Land tokenized successfully:", response);
+      await mintLandToken(payload, window.signer)
 
       setSuccess(true);
       setFormData({
