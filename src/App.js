@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
 import MainBanner from './components/MainBanner';
@@ -15,8 +14,12 @@ function App() {
       <div className="bottom_section" id="bottom_section">
         <div className="main">
           <StatsCounts />
-          <LandMarketplace />
-          <TokenizeLand />
+          <div id="marketplace">
+            <LandMarketplace />
+          </div>
+          <div id="tokenize">
+            <TokenizeLand />
+          </div>
         </div>
         <Footer />
       </div>

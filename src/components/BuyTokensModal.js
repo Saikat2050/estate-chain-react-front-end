@@ -1,64 +1,198 @@
-import React, { useState } from 'react';
-import './BuyTokensModal.scss';
+import React, { useState, useEffect } from "react";
+import "./BuyTokensModal.scss";
+import { axiosRequest } from "../utils/axiosHelper";
+import image from "../images/estate-chain-mini-logo.png";
+import { ethers } from "ethers";
+import ContractABI from "../contracts/LandToken.json";
 
 const BuyTokensModal = ({ show, onClose, property }) => {
   const [tokens, setTokens] = useState(1);
   const [agree, setAgree] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [txHash, setTxHash] = useState('');
-  const ethPrice = (tokens * property.priceEth / property.tokens).toFixed(4);
-  const wallet = '0x1234...abcd'; // Simulated wallet address
+  const [txHash, setTxHash] = useState("");
+  const [propertyDetails, setPropertyDetails] = useState({});
+  const [ethPrice, setEthPrice] = useState("");
+  const wallet = `${window.signer.address.slice(
+    0,
+    6
+  )}...${window.signer.address.slice(-4)}`;
 
-  const handleBuy = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+  useEffect(() => {
+    async function fetchLands() {
+      try {
+        const response = await axiosRequest({
+          baseUrl: "http://localhost:7022",
+          endPoint: `/v1/land-token/details/${property}`,
+          method: "GET",
+        });
+        console.log("Fetched land token:", response);
+        setPropertyDetails(response.data || []);
+        setEthPrice(
+          ((tokens * response.data.valuations) / response.data.token).toFixed(4)
+        );
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchLands();
+  }, []);
+
+  const handleBuyNow = async (tokenId, priceInEther) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contractAddress = "0xContractAddress"; // Since we dod not deploy the Smart contract, do not have contract address
+
+    const contract = new ethers.Contract(contractAddress, ContractABI, signer);
+
+    const priceInWei = ethers.utils.parseEther(priceInEther.toString());
+
+    const tx = await contract.purchase(tokenId, {
+      value: priceInWei,
+    });
+
+    await tx.wait();
+    console.log("Purchase successful!");
+  };
+
+  const handleLeaseNow = async (tokenId, leaseTerms) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contractAddress = "0xContractAddress"; // Since we dod not deploy the Smart contract, do not have contract address
+
+    const contract = new ethers.Contract(contractAddress, ContractABI, signer);
+
+    const value = ethers.utils.parseEther(leaseTerms.price.toString());
+
+    const tx = await contract.leaseLand(
+      tokenId,
+      leaseTerms.period,
+      leaseTerms.percentage,
+      { value }
+    );
+
+    await tx.wait();
+    console.log("Lease successful!");
+  };
+
+  const handleBuy = async () => {
+    try {
+      setLoading(true);
+      propertyDetails.purpose === "sale"
+        ? await handleBuyNow(
+            propertyDetails.tokenId,
+            ethPrice
+          )
+        : await handleLeaseNow(propertyDetails.tokenId, {
+            price: ethPrice,
+            period: 1,
+            percentage: propertyDetails.availability,
+          });
+
+      const response = await axiosRequest({
+        baseUrl: "http://localhost:7022",
+        endPoint: "/v1/land-token/sign",
+        method: "PATCH",
+        data: { cid: property },
+      });
+
+      console.log("Buy API response:", response.data);
+
+      // Optionally handle txHash or success from the response
+      setTxHash(response.data.txHash || "0xABCDEF1234567890");
       setSuccess(true);
-      setTxHash('0xABCDEF1234567890');
-    }, 2000);
+    } catch (error) {
+      console.error("Error buying tokens:", error);
+      alert("Something went wrong while buying tokens.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!show) return null;
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <button className="modal-close" onClick={onClose} title="Close">✖️</button>
+        <button className="modal-close" onClick={onClose} title="Close">
+          ✖️
+        </button>
         {!success ? (
           <>
             <h3>Buy Tokens</h3>
             <div className="property-summary">
-              <img src={property.image} alt="Land" />
+              <img src={image} alt="Land" />
               <div>
-                <strong>{property.title}</strong><br/>
-                {property.location}<br/>
-                {property.area} sqft<br/>
-                {property.priceEth} ETH
+                <strong>{propertyDetails.title}</strong>
+                <br />
+                {propertyDetails.location}
+                <br />
+                {propertyDetails.area} sqft
+                <br />
+                {propertyDetails.priceEth} ETH
               </div>
             </div>
-            <form className="buy-form" onSubmit={e => {e.preventDefault(); handleBuy();}}>
-              <label>Number of tokens:
-                <input type="number" min="1" max={property.tokens * property.available / 100} value={tokens} onChange={e => setTokens(e.target.value)} placeholder="10" />
+            <form
+              className="buy-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleBuy();
+              }}
+            >
+              <label>
+                Number of tokens:
+                <input
+                  type="number"
+                  min="1"
+                  max={
+                    (propertyDetails.tokens * propertyDetails.available) / 100
+                  }
+                  value={tokens}
+                  onChange={(e) => setTokens(e.target.value)}
+                  placeholder="10"
+                />
               </label>
-              <div>ETH Equivalent: <strong>{ethPrice} ETH</strong></div>
-              <div>Wallet: <span className="wallet-address">{wallet}</span></div>
+              <div>
+                ETH Equivalent: <strong>{ethPrice} ETH</strong>
+              </div>
+              <div>
+                Wallet: <span className="wallet-address">{wallet}</span>
+              </div>
               <div className="progress-bar">
-                <div className="progress-bar-inner" style={{width: property.available + '%'}}></div>
-                <span>{property.available}% Available</span>
+                <div
+                  className="progress-bar-inner"
+                  style={{ width: propertyDetails.available + "%" }}
+                ></div>
+                <span>{propertyDetails.available}% Available</span>
               </div>
               <label className="terms">
-                <input type="checkbox" checked={agree} onChange={e => setAgree(e.target.checked)} /> I agree to the Terms & Conditions
+                <input
+                  type="checkbox"
+                  checked={agree}
+                  onChange={(e) => setAgree(e.target.checked)}
+                />{" "}
+                I agree to the Terms & Conditions
               </label>
-              <button type="submit" disabled={!agree || loading} className="confirm-btn">
-                {loading ? 'Processing...' : 'Confirm & Buy'}
+              <button
+                type="submit"
+                disabled={!agree || loading}
+                className="confirm-btn"
+              >
+                {loading ? "Processing..." : "Confirm & Buy"}
               </button>
             </form>
           </>
         ) : (
           <div className="success-msg">
             <h4>🎉 Purchase Successful!</h4>
-            <div>Transaction Hash: <span className="tx-hash">{txHash}</span></div>
-            <div>Tokens Allocated: <strong>{tokens}</strong></div>
+            <div>
+              Transaction Hash: <span className="tx-hash">{txHash}</span>
+            </div>
+            <div>
+              Tokens Allocated: <strong>{tokens}</strong>
+            </div>
             <button onClick={onClose}>Close</button>
           </div>
         )}
@@ -67,4 +201,4 @@ const BuyTokensModal = ({ show, onClose, property }) => {
   );
 };
 
-export default BuyTokensModal; 
+export default BuyTokensModal;

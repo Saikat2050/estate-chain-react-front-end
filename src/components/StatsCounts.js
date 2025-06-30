@@ -1,25 +1,25 @@
 import React from 'react';
 import './scss/StatsCounts.scss';
+import missionImg from '../images/estate-chain-image.png';
 
 const StatsCounts = () => (
-  <div className="no_count">
-    <div className="counts">
-      <h2>$2.4B</h2>
-      <p>Total Value Tokenized</p>
+  <div className="mission-section">
+    <div className="mission-content">
+      <h2>Why Estate Chain?</h2>
+      <p>
+        Estate Chain is building a future where land ownership and real estate investment are
+        transparent, accessible, and borderless. By tokenizing property assets, we empower
+        individuals to trade, invest, and unlock liquidity like never before.
+      </p>
+      <p>
+        Our platform bridges the physical and digital worlds, enabling anyone to participate in
+        real estate markets with security, lower costs, and global reach.
+      </p>
     </div>
-    <div className="counts">
-      <h2>12,847</h2>
-      <p>Properties Listed</p>
-    </div>
-    <div className="counts">
-      <h2>45,923 </h2>
-      <p>Active Investors </p>
-    </div>
-    <div className="counts">
-      <h2>98.7% </h2>
-      <p>Transaction Success Rate </p>
+    <div className="mission-image">
+      <img src={missionImg} alt="Our Mission" />
     </div>
   </div>
 );
 
-export default StatsCounts; 
+export default StatsCounts;

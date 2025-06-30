@@ -121,6 +121,26 @@
                         }
                     }
                 }
+
+                .bottom_buy_buttons {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 12px;
+  
+                    button {
+                      height: 40px;
+                      border-radius: 8px;
+                      font-weight: 600;
+  
+                      &.button_bg_white {
+                        width: 65%;
+                      }
+  
+                      &.button_bg_yellow {
+                        width: 33%;
+                      }
+                    }
+                  }
             }
         }
     }
